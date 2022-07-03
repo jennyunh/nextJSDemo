@@ -33,7 +33,11 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false,
+    //set fallback to true or blocking. Tells NEXT that there might be more possible pages
+    //true will immediately return an empty page
+    //blocking will let user see page after its done prerendering
+    fallback: 'blocking',
+    //define all possible paths
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
